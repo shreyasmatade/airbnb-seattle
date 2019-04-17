@@ -89,16 +89,78 @@ Considering the problem we are trying to solve and the analysis I have selected 
        'require_guest_phone_verification',
        'reviews_per_month']
 
-2. reviews.csv
-3. calender.csv
+
+**2.calender.csv**   
+This Data set has log of property price per day. This data set can be used to determine how property prices are getting affected by the season.
+The shape of the data is ` 1393570 records and 4 columns`. (High records since each listing id almost have 365 entries)
+This dataset can be used to determine seasonal price swings in seattle airbnb. 
+
+**3.reviews.csv**  
+This data set has each review text details ever given for any property. The shape of the data is ` 84849 records and 6 columns`.
+
 
 ## Data Preparation:
+
+### Missing Values:
+### Feature Exploration:
+### Imputation:
 
 
 ## Modeling :
 
+### Regression:
+### Logistic Regression:
+
 
 ## Evaluation :
+### Root Mean Square Value:
 
 
-## Deployment :
+## Results :
+1. What are the primary factors affect the listing price?  
+Ans : 
+ 
+![](https://i.imgur.com/thrfVgC.png)
+
+Below Three features  
+1. Property_type  
+2. Zipcode  
+3. Room_TYpe  
+
+
+2. What are the important features helps owner in becoming super host?
+Ans:
+
+![](https://i.imgur.com/FnYaqFB.png)
+
+
+Important Features are :  
+1. Number of Reviews  
+2. Host Acceptance Rate  
+3. Facilities  
+4. Host Response Rate  
+5. Host Experience   
+
+
+3. Which area in Seattle is most expensive to rent?
+
+![](https://i.imgur.com/dTwAym0.png)
+
+
+4. Is there any seasonal effect in Seattle airbnb listing price? What would be best time to visit if I want to save some money?
+
+![](https://i.imgur.com/MSHGdV0.png)
+
+
+5. Are there any homes in 2016 that never occupied? Is there any significant factors in why these places were never rented?
+
+There are total : 678 listings, that were never rented in 2016
+
+Below are the feature that are affecting lost days
+
+![](https://i.imgur.com/zViJfCD.png)
+
+1.     Property type
+1.     Zipcode
+1.     Room type
+1.     Bed Type
