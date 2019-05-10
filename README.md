@@ -101,31 +101,63 @@ This data set has each review text details ever given for any property. The shap
 
 ## Data Preparation:
 
-### Missing Values:
+### Data Pre-processing and 
+From EDA, I could see that there are many features that needs to either removed or converted to correct data type for better analysis.
+I consolidated and processed all such features in function ```preprocess_features(df):```
+Following are the details of this function
+    From looking at each of the categorical variable we found that,
+    1. experiences_offered, host_verifications, market, has_availability, requires_license columns has only one value hence we need to Drop these columns from dataframe.
+    2. 'security_deposit', 'cleaning_fee', 'extra_people' these columns need to be converted to float value of $
+    3. amenities need to converted to int where number is total number of amenities
+    4. host_response_rate need to converted to float
+    5. Transit need to converted to nminal var where NaN = 0 and everuthing else is 1
+    6. host_since need to converted to diff between 01/01/2016 - host_since in days
+
 ### Feature Exploration:
+I derived few feateres from current data in order to answer the questions better
+
+1. Facilities     : Sum of total number of faciliteis provided in property.
+2. Host_eperience : Host experience in number of days
+3. Transit        : Is Transit available from property, boolean. 
+4. Lost days      : The number of days a property was available, i.e. it was not rented, is not benificial for the hosts since more the number of days property was available lesser the revenue from it. As a host, one would like to rent their property every single day of the year. I explored this target variable from Calender dataset of airbnb by summing up the number of avalilable days for a given property.  
+
+   
 ### Imputation:
+Function impute_features(df) imputes each feature depending on its type, categorical or continuous.
+Below are its details
+ 
+    This function cleans df using the following steps to produce X and y:
+    1. For each numeric variable in X, fill the column with the mean value of the column.
+    2. Lets drop all the rows which has nan values.
+    3. Create dummy variables for categorical variables
+
+### Splitting data:
+I have used train_test_split function with test size 30% and train size 70% with random state =42.
 
 
 ## Modeling :
+To understand the relationship between target and features I used supervised models. To be precise I used regression models and used coefficients of the model to decide which features are affecting target more/less.
 
 ### Regression:
+For all the continuous targets I used multiple regression model with normalization.
 ### Logistic Regression:
+For continuous target I used logistic regression model.
 
 
 ## Evaluation :
-### Root Mean Square Value:
+For evaluation I have used , R2 score.
 
 
 ## Results :
+
+The analyzed data is from 2016, hence the predictions may not be relevant in current date; however it definitely gives us some intuition to understand the affecting factors in various target variables i analyzed here.
+
 1. What are the primary factors affect the listing price?  
 Ans : 
  
-![](https://i.imgur.com/thrfVgC.png)
+![](https://i.imgur.com/thrfVgC.png)  
 
-Below Three features  
-1. Property_type  
-2. Zipcode  
-3. Room_TYpe  
+Regreesion Model Score : 0.6850
 
 
 2. What are the important features helps owner in becoming super host?
@@ -133,24 +165,20 @@ Ans:
 
 ![](https://i.imgur.com/FnYaqFB.png)
 
-
-Important Features are :  
-1. Number of Reviews  
-2. Host Acceptance Rate  
-3. Facilities  
-4. Host Response Rate  
-5. Host Experience   
+Logistic Regreesion Model Score : 0.7725
 
 
-3. Which area in Seattle is most expensive to rent?
+3. Which area in Seattle is most expensive to rent in 2016?
 
 ![](https://i.imgur.com/dTwAym0.png)
 
+From above graph, it can be inferred that in 2016 area zipcode 98134 has highest mean listing price. 
 
 4. Is there any seasonal effect in Seattle airbnb listing price? What would be best time to visit if I want to save some money?
 
 ![](https://i.imgur.com/MSHGdV0.png)
 
+Looks like, January and February is the best month to travel it one want to save some moeny on airbnb rents.
 
 5. Are there any homes in 2016 that never occupied? Is there any significant factors in why these places were never rented?
 
@@ -160,7 +188,4 @@ Below are the feature that are affecting lost days
 
 ![](https://i.imgur.com/zViJfCD.png)
 
-1.     Property type
-1.     Zipcode
-1.     Room type
-1.     Bed Type
+Negative value on coefficient suggests negative correlation and vice varsa
