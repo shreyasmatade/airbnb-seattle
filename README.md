@@ -189,3 +189,6 @@ Below are the feature that are affecting lost days
 ![](https://i.imgur.com/zViJfCD.png)
 
 Negative value on coefficient suggests negative correlation and vice varsa
+
+### References:
+https://www.thestreet.com/lifestyle/travel/how-does-airbnb-work-14714337
